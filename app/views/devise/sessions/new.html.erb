@@ -1,0 +1,61 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Log in</h4>
+  </div>
+  <div class="card-body">
+    
+   <% if flash[:alert]%>
+    <div class="alert alert-danger" role="alert">
+     Incorrect Login Info
+    </div>
+  <% end %> 
+   
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field form-group">
+    <% f.label :email %><br />
+    <%= f.email_field :email, class:"form-control",placeholder:"Email", autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field form-group">
+    <% f.label :password %><br />
+    <%= f.password_field :password, class:"form-control",placeholder:"Password", autocomplete: "current-password", :id => 'myInput' %>
+    <input type="checkbox" onclick="myFunction()">Show Password
+  </div>
+  <br/>
+  <% if devise_mapping.rememberable? %>
+    <div class="field form-check">
+      <%= f.check_box :remember_me, class: "form-check-input" %>
+      <%= f.label :remember_me %>
+    </div>
+  <br/>
+  <% end %>
+
+  <div class="actions ">
+    <%= f.submit "Log in", class:'btn btn-secondary' %>
+    
+ </div>
+  
+  
+
+<% end %>
+    
+  </div>
+</div>
+
+<script type="text/javascript">
+  function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
+
+
+<br/>
+
+<%= render "devise/shared/links" %>
